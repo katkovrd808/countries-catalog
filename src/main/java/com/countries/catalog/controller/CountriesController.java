@@ -32,13 +32,13 @@ public class CountriesController {
   }
 
   @PostMapping("/add")
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.CREATED)
   CountryJson save(@RequestBody CountryJson country) {
     return countryService.save(country);
   }
 
   @PutMapping("/update/{code}")
-  @ResponseStatus(HttpStatus.ACCEPTED)
+  @ResponseStatus(HttpStatus.OK)
   CountryJson update(@PathVariable String code, @RequestBody CountryJson country) {
     return countryService.update(country);
   }
