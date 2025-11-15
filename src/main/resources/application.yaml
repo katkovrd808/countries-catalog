@@ -2,15 +2,19 @@ spring:
   mvc:
     converters:
       preferred-json-mapper: jackson
+
   jackson:
     deserialization:
       fail-on-unknown-properties: false
+
   application:
     name: countries-catalog
+
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/postgres'
+    url: 'jdbc:postgresql://localhost:5432/countries'
     username: postgres
     password: secret
+
     hikari:
       connection-timeout: 20000
       minimum-idle: 10
@@ -18,12 +22,18 @@ spring:
       idle-timeout: 10000
       max-lifetime: 1000
       auto-commit: true
+
+  graphql:
+    graphiql:
+      enabled: true
+
   flyway:
     enabled: true
     baseline-on-migrate: true
     baseline-version: 0
     schemas: public
     locations: classpath:db/migration/countries_catalog
+
   jpa:
     hibernate:
       ddl-auto: none
