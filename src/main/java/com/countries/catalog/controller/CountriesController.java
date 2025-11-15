@@ -32,7 +32,6 @@ public class CountriesController {
   }
 
   @PostMapping("/add")
-
   @ResponseStatus(HttpStatus.CREATED)
   CountryJson save(@RequestBody CountryJson country) {
     return countryService.save(country);
