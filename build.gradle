@@ -10,9 +10,9 @@ version = '0.0.1-SNAPSHOT'
 description = 'Demo project for Spring Boot'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
 }
 
 repositories {
@@ -28,18 +28,21 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.flywaydb:flyway-core:11.7.2'
-    implementation 'org.flywaydb:flyway-database-postgresql:11.7.2'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'com.tailrocks.graphql:graphql-datetime-spring-boot-starter:6.0.0'
-    implementation 'org.springframework.grpc:spring-grpc-spring-boot-starter'
-    implementation "com.google.protobuf:protobuf-java-util:${dependencyManagement.importedProperties['protobuf-java.version']}"
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    runtimeOnly 'org.postgresql:postgresql:42.7.5'
-    annotationProcessor "org.projectlombok:lombok:1.18.38"
-    compileOnly "org.projectlombok:lombok:1.18.38"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.data:spring-data-commons'
+	implementation 'org.flywaydb:flyway-core:11.7.2'
+	implementation 'org.flywaydb:flyway-database-postgresql:11.7.2'
+	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+	implementation 'com.tailrocks.graphql:graphql-datetime-spring-boot-starter:6.0.0'
+	implementation 'org.springframework.grpc:spring-grpc-spring-boot-starter'
+	implementation "com.google.protobuf:protobuf-java-util:${dependencyManagement.importedProperties['protobuf-java.version']}"
+	implementation 'com.tailrocks.graphql:graphql-datetime-spring-boot-starter:6.0.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	runtimeOnly 'org.postgresql:postgresql:42.7.5'
+	annotationProcessor "org.projectlombok:lombok:1.18.38"
+	compileOnly "org.projectlombok:lombok:1.18.38"
 }
 
 protobuf {
@@ -65,5 +68,5 @@ protobuf {
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }

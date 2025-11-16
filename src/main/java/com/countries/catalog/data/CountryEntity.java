@@ -1,6 +1,7 @@
 package com.countries.catalog.data;
 
 import com.countries.catalog.domain.CountryJson;
+import com.countries.catalog.domain.graphql.CountryInputGql;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +37,14 @@ public class CountryEntity {
     ce.setName(countryJson.name());
     ce.setIsoCode(countryJson.isoCode());
     ce.setCoordinates(countryJson.coordinates());
+    return ce;
+  }
+
+  public static CountryEntity fromGql(CountryInputGql countryGql) {
+    CountryEntity ce = new CountryEntity();
+    ce.setName(countryGql.name());
+    ce.setIsoCode(countryGql.isoCode());
+    ce.setCoordinates(countryGql.coordinates());
     return ce;
   }
 
