@@ -37,6 +37,7 @@ dependencies {
 	implementation 'com.tailrocks.graphql:graphql-datetime-spring-boot-starter:6.0.0'
 	implementation 'org.springframework.grpc:spring-grpc-spring-boot-starter'
 	implementation "com.google.protobuf:protobuf-java-util:${dependencyManagement.importedProperties['protobuf-java.version']}"
+    implementation 'io.grpc:grpc-services'
 	implementation 'com.tailrocks.graphql:graphql-datetime-spring-boot-starter:6.0.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

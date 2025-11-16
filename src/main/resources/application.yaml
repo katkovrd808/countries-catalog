@@ -3,6 +3,11 @@ spring:
     converters:
       preferred-json-mapper: jackson
 
+  grpc:
+    server:
+      servlet:
+        enabled: false
+
   jackson:
     deserialization:
       fail-on-unknown-properties: false
