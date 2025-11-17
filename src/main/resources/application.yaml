@@ -5,8 +5,12 @@ spring:
 
   grpc:
     server:
+      port: 9090
       servlet:
         enabled: false
+      security:
+        csrf:
+          enabled: false
 
   jackson:
     deserialization:
