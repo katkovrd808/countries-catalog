@@ -6,13 +6,16 @@ import com.countries.catalog.domain.graphql.CountryInputGql;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public interface CountryService {
 
   List<CountryJson> allCountries();
 
-  Slice<CountryGql> allCountriesGql(Pageable pageable);
+  Slice<CountryGql> allCountriesGql(@Nullable Pageable pageable);
+
+  List<CountryGql> findAll();
 
   CountryJson findByIsoCode(String code);
 
@@ -21,6 +24,8 @@ public interface CountryService {
   CountryJson save(CountryJson country);
 
   CountryGql saveGql(CountryInputGql country);
+
+  List<CountryGql> saveAllGql(List<CountryInputGql> countries);
 
   CountryJson update(CountryJson country);
 

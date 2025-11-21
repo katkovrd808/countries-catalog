@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,12 +38,14 @@ public class DbCountryService implements CountryService {
       .toList();
   }
 
+  @Nonnull
   @Transactional(readOnly = true)
   @Override
   public CountryJson findByIsoCode(String code) {
     return CountryJson.fromGql(findByIsoCodeGql(code));
   }
 
+  @Nonnull
   @Transactional
   @Override
   public CountryJson save(@RequestBody CountryJson country) {
@@ -55,6 +59,7 @@ public class DbCountryService implements CountryService {
     return CountryJson.fromEntity(countriesRepository.save(ce));
   }
 
+  @Nonnull
   @Transactional
   @Override
   public CountryJson update(@RequestBody CountryJson country) {
@@ -73,6 +78,7 @@ public class DbCountryService implements CountryService {
     return CountryJson.fromEntity(countriesRepository.save(ce));
   }
 
+  @Nonnull
   @Transactional(readOnly = true)
   @Override
   public Page<CountryGql> allCountriesGql(Pageable pageable) {
@@ -80,6 +86,15 @@ public class DbCountryService implements CountryService {
       .map(CountryGql::fromEntity);
   }
 
+  @Nonnull
+  @Override
+  public List<CountryGql> findAll() {
+    return countriesRepository.findAll().stream()
+      .map(CountryGql::fromEntity)
+      .toList();
+  }
+
+  @Nonnull
   @Transactional(readOnly = true)
   @Override
   public CountryGql findByIsoCodeGql(String code) {
@@ -90,12 +105,13 @@ public class DbCountryService implements CountryService {
       .orElseThrow(() -> new CountryNotFoundException("Country with ISO code " + code + " was not found! Try to create it first."));
   }
 
+  @Nonnull
   @Transactional
   @Override
   public CountryGql saveGql(@RequestBody CountryInputGql country) {
     if (country == null) {
       throw new IllegalArgumentException("Country to save can not be null!");
-    } else if (findOptionalByIsoCode(country.isoCode()).isEmpty()) {
+    } else if (findOptionalByIsoCode(country.isoCode()).isPresent()) {
       throw new CountryAlreadyExistsException("Country with ISO code " + country.isoCode() + " already exists!");
     }
 
@@ -103,6 +119,20 @@ public class DbCountryService implements CountryService {
     return CountryGql.fromEntity(countriesRepository.save(ce));
   }
 
+  @Nonnull
+  @Override
+  public List<CountryGql> saveAllGql(List<CountryInputGql> countries) {
+    if (countries.isEmpty()) {
+      throw new IllegalArgumentException("List of countries can't be null!");
+    }
+    List<CountryGql> created = new ArrayList<>();
+    for (CountryInputGql country : countries) {
+      created.add(saveGql(country));
+    }
+    return created;
+  }
+
+  @Nonnull
   @Transactional
   @Override
   public CountryGql updateGql(@RequestBody CountryInputGql country) {
@@ -121,6 +151,7 @@ public class DbCountryService implements CountryService {
     return CountryGql.fromEntity(countriesRepository.save(ce));
   }
 
+  @Nonnull
   @Transactional(readOnly = true)
   private Optional<CountryJson> findOptionalByIsoCode(String code) {
     return countriesRepository.findByIsoCode(code)

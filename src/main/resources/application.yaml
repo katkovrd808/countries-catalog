@@ -3,6 +3,15 @@ spring:
     converters:
       preferred-json-mapper: jackson
 
+  grpc:
+    server:
+      port: 9090
+      servlet:
+        enabled: false
+      security:
+        csrf:
+          enabled: false
+
   jackson:
     deserialization:
       fail-on-unknown-properties: false

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package com.countries.grpc.countriescatalog;
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.countries.grpc.countriescatalog";
+option java_outer_classname = "CountriescatalogProto";
+
+service CountriescatalogService {
+    rpc Country(IsoRequest) returns (CountryResponse) {}
+    rpc Countries(google.protobuf.Empty) returns (CountryListResponse);
+    rpc AddCountry(CountryRequest) returns (CountryResponse) {}
+    rpc UpdateCountry(CountryRequest) returns (CountryResponse) {}
+    rpc ClientStreamingAddCountries(stream CountryRequest) returns (Count);
+}
+
+message IsoRequest {
+    string iso_code = 1;
+}
+
+message Count {
+    uint32 count = 1;
+}
+
+message CountryRequest {
+    string name = 1;
+    string iso_code = 2;
+    GeometryData coordinates = 3;
+}
+
+message CountryResponse {
+    string id = 1;
+    string name = 2;
+    string iso_code = 3;
+    GeometryData coordinates = 4;
+}
+
+message CountryListResponse {
+    repeated CountryResponse countries = 1;
+}
+
+message GeometryData {
+    repeated PolygonShape polygons = 1;
+}
+
+message PolygonShape {
+    repeated RingPath rings = 1;
+}
+
+message RingPath {
+    repeated Coordinate points = 1;
+}
+
+message Coordinate {
+    double longitude = 1;
+    double latitude = 2;
+}
