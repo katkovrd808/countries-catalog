@@ -14,45 +14,11 @@ type Country {
     id: ID!
     name: String!
     isoCode: String!
-    coordinates: QuadList!
+    coordinates: [[[[Float!]!]!]!]!
 }
 
 input CountryInput {
     name: String
     isoCode: String!
-    coordinates: QuadListInput!
-}
-
-
-
-type FloatList {
-    data: [Float!]
-}
-
-input FloatListInput {
-    data: [Float!]
-}
-
-type DoubleList {
-    data: [FloatList!]
-}
-
-input DoubleListInput {
-    data: [FloatListInput!]
-}
-
-type TripleList {
-    data: [DoubleList!]
-}
-
-input TripleListInput {
-    data: [DoubleListInput!]
-}
-
-type QuadList {
-    data: [TripleList!]
-}
-
-input QuadListInput {
-    data: [TripleListInput!]
+    coordinates: [[[[Float!]!]!]!]!
 }
